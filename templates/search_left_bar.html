@@ -1,0 +1,25 @@
+<div class="col-md-3 sidebar">
+    <!--SEARCH WIDGET START-->
+    <div class="widget widget-search">
+        <h2>Search</h2>
+        <div class="input-container">
+            <form action="{% url 'search' %}" >
+                <div class="input-field">
+                    <input type="text" name="q" placeholder="Search Here...">
+                   <button class="btn" type="submit" name="action">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--SEARCH WIDGET END-->
+    <!--CATEGORY WIDGET START-->
+    <div class="widget widget-categories">
+        <h2>Authors</h2>
+        <ul>
+            {% for author in order_authors %}
+            <li><a href="?author={{ author.slug }}">{{ author.name | truncatechars:35 }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!--CATEGORY WIDGET END-->
+</div>

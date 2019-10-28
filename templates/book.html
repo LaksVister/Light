@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+<div class="kode-content padding-tb-50">
+    <div class="container">
+            {% if messages %}
+            <br><br>
+            {% for message in messages %}
+            <p class="alert alert-success" role="alert">
+              {{ message }}
+            </p>
+            {% endfor %}
+            <br><br>
+            {% endif %}
+        <div class="row">
+            <div class="col-md-13">
+                <!--BOOK DETAIL START-->
+                <div class="lib-book-detail">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="kode-thumb">
+                                <img src="{{ book.img.url }}" alt="{{ book.name }}"
+                                    style="width: 306px; height:460px;">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="kode-text">
+                                <h2>{{ book.name }}</h2>
+                                <div class="product-review">
+                                    <div class="rating">
+                                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                    </div>
+                                    <p>{{ reviews.count }} reviews</p>
+                                </div>
+                                <div
+                                    <p>Author : <span class="color">{{ book.users.all|cut:"<QuerySet [<User: "|cut:">]>"|cut:"<QuerySet []>" }}</span></p>
+                                </div>
+                                <div class="book-text">
+                                    <p>{{ book.description | safe | cut:"Can you add one?" | truncatechars_html:145 }}</p>
+                                </div>
+                                <div class="book-text">
+                                    <p>Published: {{ book.published }}.</p>
+                                    <p>Language: {{ book.language }}</p>
+                                    <p>Author: {{ book.authors.all | cut:"<QuerySet [<Author: " | cut:">]>" | cut:"<QuerySet []>"}}.</p>
+                                    <p>Categories: {{ book.categs.all | cut:"<QuerySet [" | cut:"<Category: " | cut:">" | cut:"]" | truncatechars:100 }}</p>
+                                    <p>Places: {{ book.places }}</p>
+                                    <p>Times: {{ book.times }}</p>
+                                    <p>Pages: {{ book.pages }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--BOOK DETAIL END-->
+                <!--PRODUCT REVIEW TABS START-->
+                <div class="product-review-tabs">
+            <!--NAV TABS START-->
+            <ul class="nav nav-tabs" role="tablist">
+                {% if reviews %}
+                <li role="presentation"><a href="books-detail.html#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
+                {% endif %}
+                <li role="presentation"><a href="books-detail.html#tags" aria-controls="tags" role="tab" data-toggle="tab">Categories</a></li>
+                <li role="presentation" class="active"><a href="books-detail.html#CustomTab" aria-controls="CustomTab" role="tab" data-toggle="tab">Descriptions</a></li>
+                <li role="presentation"><a href="books-detail.html#ID" aria-controls="ID" role="tab" data-toggle="tab">ID numbers</a></li>
+            </ul>
+            <!--NAV TABS END-->
+            <!--TAB PANEL START-->
+            <div class="tab-content">
+                {% if reviews %}
+                <div role="tabpanel" class="tab-pane fade" id="reviews">
+                    <div class="kode-comments">
+                        {% for review in reviews %}
+                        <div>
+                            <div class="rateyo"
+                                 data-rateyo-rating="{{ review.rating }}"
+                                 data-rateyo-num-stars="5"></div>
+                        </div>
+                        <div class="kode-text">
+                            <h4>{{ review.name }}</h4>
+                            <p class="designation">{{ review.published }}</p>
+                            <p>{{ review.comment | safe }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                <div role="tabpanel" class="tab-pane fade" id="tags">
+                     <div class="product-tags">
+                            {% for cat in book.categs.all %}
+                            <a href="{% url 'category' cat.slug %}#">{{ cat }}</a>
+                            {% endfor %}
+                     </div>
+                </div>
+                    <div role="tabpanel" class="tab-pane fade in active" id="CustomTab">
+                        <p>{{ book.description | safe | cut:" Can you add one?" }}</p>
+                    </div>
+                <div role="tabpanel" class="tab-pane fade" id="ID">
+                    <p>Openlibrary: {{ book.openlibrary }}</p>
+                    <p>Archive: {{ book.archive }}</p>
+                    <p>ISBN 10: {{ book.isbn10 }}</p>
+                    <p>ISBN 13: {{ book.isbn13 }}</p>
+                </div>
+            </div>
+            <!--TAB PANEL END-->
+        </div>
+                <!--PRODUCT REVIEW TABS END-->
+                <div class="input-container">
+                    <form action="{% url 'book' object.slug %}" method="post">
+                    {% csrf_token %}
+                        <div class="input-field">
+                            Name: <input type="text" name="name" placeholder="Ivan">
+                        </div>
+                        <div class="input-field">
+                            Email: <input type="text" name="email" placeholder="IvanMahno@gmail.com">
+                        </div>
+                        <div class="input-field">
+                            Comment: <textarea type="text" name="comment" placeholder="Interesting book..."></textarea>
+                        </div>
+<!--                        <div>-->
+<!--                            Your rating: <div class="rateyo"-->
+<!--                                 data-rateyo-rating="{{ review.rating }}"-->
+<!--                                 data-rateyo-num-stars="5"></div>-->
+<!--                        </div>-->
+                        <div class="input-field">
+                            Your rating: <input type="text" name="rating" placeholder="From 1 of 5">
+                        </div>
+                        <br>
+                        <button type="submit" class="add-to-cart">Review</button>
+                    </form>
+                </div>
+                <!--RELATED PRODUCTS START-->
+                <div class="lib-related-products">
+                    <h2>Related Books</h2>
+                    <div class="row">
+                        <!--PRODUCT GRID START-->
+                        {% for book in related_books %}
+                        <div class="col-md-3 col-sm-6">
+                            <div class="best-seller-pro">
+                                 <figure>
+                                    <img src="{{ book.img.url }}" alt="{{ book.name }}"
+                                        style="width: 201px; height:298px;">
+                                 </figure>
+                        <div class="kode-text">
+                            <h3><a href="{% url 'book' book.slug %}#">{{ book.name | truncatechars:20 }}</a></h3>
+                        </div>
+                        <div class="kode-caption">
+                            <h3>{{ book.name | truncatechars:80 }}</h3>
+                            <div class="rating">
+<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+</div>
+                            <p>{{ book.authors.all | cut:"<QuerySet [<Author: " | cut:">]>" | cut:"<QuerySet []>"}}</p>
+                            <a href="{% url 'book' book.slug %}#" class="add-to-cart">View</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!--PRODUCT GRID END-->
+                    </div>
+                </div>
+                <!--RELATED PRODUCTS END-->
+            </div>
+        </div>
+    </div>
+</div>
+<section class="kode-uptodate">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<h2>stay up-to-dated</h2>
+				</div>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="social-icons">
+								<ul>
+									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+									<li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-9">
+							<div class="input-container">
+								<input type="text" placeholder="Your E-mail Address" id="sub-2">
+								<button>Subscribe</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock main %}

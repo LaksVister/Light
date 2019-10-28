@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Book Library - Book Guide Author, Publication and Store</title>
+<!-- CUSTOM STYLE -->
+<link href="{% static 'style.css' %}" rel="stylesheet">
+<!-- THEME TYPO -->
+<link href="{% static 'css/themetypo.css' %}" rel="stylesheet">
+<!-- BOOTSTRAP -->
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+<!-- COLOR FILE -->
+<link href="{% static 'css/color.css' %}" rel="stylesheet">
+<!-- FONT AWESOME -->
+<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+<!-- BX SLIDER -->
+<link href="{% static 'css/bxslider.css' %}" rel="stylesheet">
+<!-- Boostrap Slider -->
+<link href="{% static 'css/bootstrap-slider.css' %}" rel="stylesheet">
+<!-- Widgets -->
+<link href="{% static 'css/widget.css' %}" rel="stylesheet">
+<!-- Owl Carusel -->
+<link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet">
+<!-- responsive -->
+<link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+<!-- Component -->
+<link href="{% static 'js/dl-menu/component.css' %}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'css/bookblock.css' %}" />
+<!-- Custom rating -->
+<link href="{% static 'css/custom.css' %}" rel="stylesheet">
+
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<![endif]-->
+</head>
+<body>
+<div id="loader-wrapper">
+	<div id="loader"></div>
+
+	<div class="loader-section section-left"></div>
+	<div class="loader-section section-right"></div>
+
+</div>
+<!--WRAPPER START-->
+<div class="wrapper">
+
+	<!--HEADER START-->
+	{% include 'header.html' %}
+    <!--HEADER END-->
+
+    <!--BANNER START-->
+    {% include 'banner.html' %}
+    <!--BANNER END-->
+
+    <!--BUT NOW START-->
+    {% include 'search_section.html' %}
+	<!--BUT NOW END-->
+
+    <!--CONTENT START-->
+	{% block main %}{% endblock main %}
+    <!--CONTENT END-->
+
+    {% include 'footer.html' %}
+
+</div>
+<!--WRAPPER END-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'js/modernizr.custom.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.bxslider.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-slider.js' %}"></script>
+<script src="{% static 'js/waypoints.min.js' %}"></script>
+<script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.js' %}"></script>
+<script src="{% static 'js/dl-menu/modernizr.custom.js' %}"></script>
+<script src="{% static 'js/dl-menu/jquery.dlmenu.js' %}"></script>
+<script src="{% static 'js/jquerypp.custom.js' %}"></script>
+<script src="{% static 'js/jquery.bookblock.js' %}"></script>
+<script src="{% static 'js/functions.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

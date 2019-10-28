@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+<div class="kode-content padding-tb-50">
+    <div class="container">
+        <div class="row">
+            {% include 'search_left_bar.html' %}
+            <div class="col-md-9">
+                <h1>Books about {{ object.name }}</h1>
+                <div class="row">
+                    <!--BOOK LISTING START-->
+                    {% for book in book_list %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="books-listing-4">
+                            <div class="kode-thumb">
+                                <a href="{% url 'book' book.slug %}#"><img src="{{ book.img.url }}"
+                                    style="width: 201px; height:298px;"></a>
+                            </div>
+                            <div class="kode-text">
+                                <h3><a href="{% url 'book' book.slug %}#">{{ book.name | truncatechars:12 }}</a></h3>
+                            </div>
+                            <div class="book-price">
+                                <div class="rating">
+                                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                </div>
+                            </div>
+                            <a href="{% url 'book' book.slug %}#" class="add-to-cart">View</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!--BOOK LISTING END-->
+                    {% include 'paginator.html' %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<section class="kode-uptodate">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>stay up-to-dated</h2>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="social-icons">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-container">
+                            <input type="text" placeholder="Your E-mail Address" id="sub-2">
+                            <button>Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock main %}

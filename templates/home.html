@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+<div class="kode-content">
+
+    <!--TOP SELLERS SECTION START-->
+    <section class="lib-categories-section">
+        <div class="container">
+            <!--SECTION CONTENT START-->
+            <div class="section-heading-1 dark-sec">
+                <h2>Our Top Categories</h2>
+                <p>Here are some of the Top Categories of the Books Available.</p>
+                <div class="kode-icon"><i class="fa fa-book"></i></div>
+            </div>
+            <!--SECTION CONTENT END-->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="index-1.html#Photography" aria-controls="Photography"
+                                                          role="tab" data-toggle="tab">Romance</a></li>
+                <li role="presentation"><a href="index-1.html#Biographies" aria-controls="Biographies" role="tab"
+                                           data-toggle="tab">Fantasy</a></li>
+                <li role="presentation"><a href="index-1.html#Business" aria-controls="Business" role="tab"
+                                           data-toggle="tab">History</a></li>
+                <li role="presentation"><a href="index-1.html#Computers" aria-controls="Computers" role="tab"
+                                           data-toggle="tab">Biographies</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <!--Romance-->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="Photography">
+                    <ul class="bxslider-1">
+                        <li>
+                            <!--PRODUCT GRID START-->
+                            {% for book in romance_books %}
+                            <div class="col-md-3 col-sm-6 best-seller-pro">
+                                <figure>
+                                    <img src="{{ book.img.url }}" alt="{{ book.name }}"
+                                         style="width: 211px; height:314px;">
+                                </figure>
+                                <div class="kode-text">
+                                    <h3>{{ book.name | truncatechars:20 }}</h3>
+                                </div>
+                                <div class="kode-caption">
+                                    <h3>{{ book.name | truncatechars:80 }}</h3>
+                                    <div class="rating">
+                                    </div>
+                                    <p>{{ book.authors.all | cut:"<QuerySet [<Author: " | cut:">]>" | cut:"<QuerySet []>"}}</p>
+                                    <a href="{% url 'book' book.slug %}#" class="add-to-cart">View</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!--PRODUCT GRID END-->
+                        </li>
+                    </ul>
+                </div>
+                <!--Fantasy-->
+                <div role="tabpanel" class="tab-pane fade" id="Biographies">
+                    <ul class="bxslider-2">
+                        <li>
+                            <!--PRODUCT GRID START-->
+                            {% for book in fantasy_books %}
+                            <div class="col-md-3 col-sm-6 best-seller-pro">
+                                <figure>
+                                    <img src="{{ book.img.url }}" alt="{{ book.name }}"
+                                         style="width: 211px; height:314px;">
+                                </figure>
+                                <div class="kode-text">
+                                    <h3>{{ book.name | truncatechars:20 }}</h3>
+                                </div>
+                                <div class="kode-caption">
+                                    <h3>{{ book.name | truncatechars:80 }}</h3>
+                                    <div class="rating">
+                                    </div>
+                                    <p>{{ book.authors.all | cut:"<QuerySet [<Author: " | cut:">]>" | cut:"<QuerySet []>"}}</p>
+                                    <a href="{% url 'book' book.slug %}#" class="add-to-cart">View</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!--PRODUCT GRID END-->
+                        </li>
+                    </ul>
+                </div>
+                <!--History-->
+                <div role="tabpanel" class="tab-pane fade" id="Business">
+                    <ul class="bxslider-3">
+                        <li>
+                            <!--PRODUCT GRID START-->
+                            {% for book in history_books %}
+                            <div class="col-md-3 col-sm-6 best-seller-pro">
+                                <figure>
+                                    <img src="{{ book.img.url }}" alt="{{ book.name }}"
+                                         style="width: 211px; height:314px;">
+                                </figure>
+                                <div class="kode-text">
+                                    <h3>{{ book.name | truncatechars:20 }}</h3>
+                                </div>
+                                <div class="kode-caption">
+                                    <h3>{{ book.name | truncatechars:80 }}</h3>
+                                    <div class="rating">
+                                    </div>
+                                    <p>{{ book.authors.all | cut:"<QuerySet [<Author: " | cut:">]>" | cut:"<QuerySet []>"}}</p>
+                                    <a href="{% url 'book' book.slug %}#" class="add-to-cart">View</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!--PRODUCT GRID END-->
+                        </li>
+                    </ul>
+                </div>
+                <!--Biographies-->
+                <div role="tabpanel" class="tab-pane fade" id="Computers">
+                    <ul class="bxslider-4">
+                        <li>
+                            <!--PRODUCT GRID START-->
+                            {% for book in biographies_books %}
+                            <div class="col-md-3 col-sm-6 best-seller-pro">
+                                <figure>
+                                    <img src="{{ book.img.url }}" alt="{{ book.name }}"
+                                         style="width: 211px; height:314px;">
+                                </figure>
+                                <div class="kode-text">
+                                    <h3>{{ book.name | truncatechars:20 }}</h3>
+                                </div>
+                                <div class="kode-caption">
+                                    <h3>{{ book.name | truncatechars:80 }}</h3>
+                                    <div class="rating">
+
+                                    </div>
+                                    <p>{{ book.authors.all | cut:"<QuerySet [<Author: " | cut:">]>" | cut:"<QuerySet []>"}}</p>
+                                    <a href="{% url 'book' book.slug %}#" class="add-to-cart">View</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!--PRODUCT GRID END-->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="lib-count-up-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="count-up">
+                        <span class="counter circle">{{ len_users|length }}</span>
+                        <p>Members</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="count-up">
+                        <span class="counter circle">{{ len_authors|length }}</span>
+                        <p>Authors</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="count-up">
+                        <span class="counter circle">{{ len_books|length }}</span>
+                        <p>Book Published</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--BECOME A MEMBER START-->
+    <!--BECOME A MEMBER END-->
+</div>
+
+{% endblock main %}
